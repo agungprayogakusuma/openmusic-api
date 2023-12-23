@@ -1,4 +1,5 @@
 const { nanoid } = require('nanoid');
+const InvariantError = require('../../exceptions/InvariantError');
 const NotFoundError = require('../../exceptions/NotFoundError');
 
 class MusicsService {
@@ -16,9 +17,12 @@ class MusicsService {
     this._albums.push(newAlbum);
 
     const isSuccess = this._albums.filter((album) => album.id === id).length > 0;
+
     if (isSuccess) {
-      return id;
+      throw new InvariantError('Album gagal ditambahkan');
     }
+
+    return id;
   }
 
   getAlbumById(id) {
@@ -73,9 +77,12 @@ class MusicsService {
     this._songs.push(newSong);
 
     const isSuccess = this._songs.filter((song) => song.id === id).length > 0;
+
     if (isSuccess) {
-      return id;
+      throw new InvariantError('Lagu gagal ditambahkan');
     }
+
+    return id;
   }
 
   getSongs() {

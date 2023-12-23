@@ -15,5 +15,5 @@ const routes = (handler) => [
     handler: (request, h) => handler.deleteAuthenticationHandler(request, h),
   },
 ];
- 
+
 module.exports = routes;
