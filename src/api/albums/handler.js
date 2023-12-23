@@ -9,7 +9,7 @@ class AlbumsHandler {
     this._validator.validateAlbumPayload(request.payload);
     const { name, year } = request.payload;
 
-    const albumId = await this._albumsService.addAlbum({ name, year });
+    const albumId = await this._albumsService.addAlbum(name, year);
 
     const response = h.response({
       status: 'success',
