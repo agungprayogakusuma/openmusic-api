@@ -16,7 +16,7 @@ class PlaylistSongsService {
     const songQueryResult = await this._pool.query(songQuery);
 
     if (!songQueryResult.rows[0]) {
-      throw new NotFoundError('Lagu tidak ditemukan')
+      throw new NotFoundError('Lagu tidak ditemukan');
     }
 
     const id = nanoid(16);
@@ -50,7 +50,7 @@ class PlaylistSongsService {
       name: playlist.name,
       username: playlist.username,
       songs: result.rows,
-    }
+    };
   }
 
   async deleteSongInPlaylist(songId) {

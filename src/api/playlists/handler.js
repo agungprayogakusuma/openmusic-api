@@ -2,7 +2,7 @@ class PlaylistsHandler {
   constructor(
     PlaylistsService,
     PlaylistSongsService,
-    validator
+    validator,
   ) {
     this._playlistsService = PlaylistsService;
     this._playlistSongsService = PlaylistSongsService;
@@ -44,7 +44,7 @@ class PlaylistsHandler {
   async deletePlaylistHandler(request) {
     const { id: credentialId } = request.auth.credentials;
     const { id } = request.params;
-    
+
     await this._playlistsService.verifyPlaylistOwner(id, { owner: credentialId });
 
     await this._playlistsService.deletePlaylistById(id);
@@ -81,7 +81,7 @@ class PlaylistsHandler {
   async getPlaylistSongsHandler(request) {
     const { id: credentialId } = request.auth.credentials;
     const { id } = request.params;
-    
+
     await this._playlistsService.verifyPlaylistOwner(id, { owner: credentialId });
 
     const playlist = await this._playlistsService.getPlaylistById(id);
@@ -91,8 +91,8 @@ class PlaylistsHandler {
       status: 'success',
       data: {
         playlist: playlistWithSongs,
-      }
-    }
+      },
+    };
   }
 
   async deletePlaylistSongHandler(request) {
@@ -102,15 +102,15 @@ class PlaylistsHandler {
     const { id } = request.params;
 
     await this._playlistsService.verifyPlaylistOwner(id, { owner: credentialId });
-    
+
     const { songId } = request.payload;
 
-    const playlistSongs = await this._playlistSongsService.deleteSongInPlaylist(songId);
+    await this._playlistSongsService.deleteSongInPlaylist(songId);
 
     return {
       status: 'success',
       message: 'Lagu di dalam playlist berhasil dihapus',
-    }
+    };
   }
 }
 
